@@ -273,7 +273,7 @@ public function checkCredentials($credentials, UserInterface $user)
 
        // actually executes the queries (i.e. the INSERT query)
        $entityManager->flush();
-return new RedirectResponse( $this->router->generate('login') );
+return new RedirectResponse( $this->router->generate('login-page') );
   }
 
 
@@ -311,7 +311,7 @@ $loan = new Loan();
 //               ->getForm();
 if(! $this->session->get('cur_user')) {
 
-return new RedirectResponse( $this->router->generate('login') );
+return new RedirectResponse( $this->router->generate('login-page') );
 }
        $form = $this->createFormBuilder($loan)
                        ->add('money', TextType::class)
@@ -374,11 +374,15 @@ public function createAdmin()
        $user->setname('hassan');
        $user->setaddress('0000');
        $user->setmail('asa20000928@gmail.com');
-       $user->setUserName('hassanharby');
+       $user->setUserName('hassanAdmin');
 $user->setIsAdmin(1);
-    $user->setPassword($this->passwordEncoder->encodePassword($user,  '0000' ));
-
-
+    // $user->setPassword($this->passwordEncoder->encodePassword($user,  '0000' ));
+$user->setPassword('0000');
+$user->setIsGuarantor(0);
+$user->setIsDebtor(0);
+$user->setIsCreditor(0);
+$user->setMoney(0);
+$user->setWhatsApp(0);
    // // tell Doctrine you want to (eventually) save the Product (no queries yet)
    $entityManager->persist($user);
 
@@ -466,7 +470,7 @@ $user=null;
  {
 
  if(! $this->session->get('cur_user')) {
-        return new RedirectResponse( $this->router->generate('login') );
+        return new RedirectResponse( $this->router->generate('login-page') );
  }
 
   $entityManager = $this->getDoctrine()->getManager();
@@ -574,6 +578,11 @@ $user= $this->session->get('cur_user');
   */
  public function _reguestLoan()
  {
+   if(! $this->session->get('cur_user')) {
+
+   return new RedirectResponse( $this->router->generate('login-page') );
+   }
+
    return $this->render('input-page-defult.html.twig',
    [
 'cardTitle'=>'reguest Loan'
@@ -589,6 +598,10 @@ $user= $this->session->get('cur_user');
  */
  public function  _reguestLoanSubmit(Request $request)
  {
+   if(! $this->session->get('cur_user')) {
+
+   return new RedirectResponse( $this->router->generate('login-page') );
+   }
 
     $First_Guarantor = $request->request->get('First_Guarantor');
     $Second_Guarantor = $request->request->get('Second_Guarantor');
@@ -618,6 +631,14 @@ $loan->setState(0);
  */
  public function _editAccountPage(User $user)
  {
+   if(! $this->session->get('cur_user')) {
+
+   return new RedirectResponse( $this->router->generate('login-page') );
+   }
+
+      if(! $this->session->get('cur_user')->getIsAdmin())  return new Response('you must be admin !');
+     if (! $this->session->get('Loan_edit'))   return new RedirectResponse( $this->router->generate('1home Loan') );
+
    $loan=$this->session->get('Loan_edit');
     // if(! $this->session->get('cur_user')->getIsAdmin())  return new
    //  if (! $this->session->get('Loan_edit')) return new
@@ -640,7 +661,7 @@ $loan->setState(0);
  */
  public function  _editAccountSubmit(User $user,Request $request)
  {
-
+     if (! $this->session->get('Loan_edit'))   return new RedirectResponse( $this->router->generate('1home Loan') );
 // loan //user //send //receive //Type
      $account = $request->request->get('Account');
      if(!is_numeric($account)) return new Response('account must be number');
@@ -736,6 +757,7 @@ return new RedirectResponse( $this->router->generate($this->dir,['id'=>$this->di
      */
      public function addCroditorSubmit(Loan $loan,Request $request)
      {
+            if (! $this->session->get('Loan_edit'))   return new RedirectResponse( $this->router->generate('1home Loan') );
 $this->dirid=$this->session->get('Loan_edit')->getId();
          $Creditor = $request->request->get('Creditor');
 
@@ -813,6 +835,7 @@ else if($key->getState()==-1)$sta="Reject";
              */
             public function delCreditorLoan(CreditorLoan $loan )
             {
+                   if (! $this->session->get('Loan_edit'))   return new RedirectResponse( $this->router->generate('1home Loan') );
               $this->dirid=$this->session->get('Loan_edit')->getId();
                 $entityManager = $this->getDoctrine()->getManager();
          $entityManager->remove($loan);
@@ -855,7 +878,7 @@ else if($key->getState()==-1)$sta="Reject";
             */
             public function  _editStartDateSubmit(Loan $loan,Request $request)
             {
-
+     if (! $this->session->get('Loan_edit'))   return new RedirectResponse( $this->router->generate('1home Loan') );
                 $StartDate = $request->request->get('StartDate');
 
           $this->dirid=$this->session->get('Loan_edit')->getId();
@@ -874,7 +897,7 @@ else if($key->getState()==-1)$sta="Reject";
             */
             public function  _editEndDateSubmit(Loan $loan,Request $request)
             {
-
+     if (! $this->session->get('Loan_edit'))   return new RedirectResponse( $this->router->generate('1home Loan') );
                 $EndDate = $request->request->get('EndDate');
 
 $this->dirid=$this->session->get('Loan_edit')->getId();
@@ -893,7 +916,7 @@ $this->dirid=$this->session->get('Loan_edit')->getId();
             */
             public function  _editMoneySubmit(Loan $loan,Request $request)
             {
-
+     if (! $this->session->get('Loan_edit'))   return new RedirectResponse( $this->router->generate('1home Loan') );
                 $Money = $request->request->get('Money');
 if(! is_numeric($Money))  return new Response('error');
 $this->dirid=$this->session->get('Loan_edit')->getId();
@@ -940,7 +963,7 @@ $this->dirid=$this->session->get('Loan_edit')->getId();
             */
             public function  _editFirst_GuarantorSubmit(Loan $loan,Request $request)
             {
-
+     if (! $this->session->get('Loan_edit'))   return new RedirectResponse( $this->router->generate('1home Loan') );
                 $First_Guarantor = $request->request->get('First_Guarantor');
 
 $this->dirid=$this->session->get('Loan_edit')->getId();
@@ -976,7 +999,7 @@ $this->dirid=$this->session->get('Loan_edit')->getId();
 
             public function  _editSecond_GuarantorSubmit(Loan $loan,Request $request)
             {
-
+     if (! $this->session->get('Loan_edit'))   return new RedirectResponse( $this->router->generate('1home Loan') );
                 $Second_Guarantor = $request->request->get('Second_Guarantor');
 
 $this->dirid=$this->session->get('Loan_edit')->getId();
@@ -1082,9 +1105,13 @@ function Feeling($condiction){
 */
 public function ReportPage(Loan $loan)
 {
+  if(! $this->session->get('cur_user')) {
 
-   // if(! $this->session->get('cur_user')->getIsAdmin())  return new
-  //  if (! $this->session->get('Loan_edit')) return new
+  return new RedirectResponse( $this->router->generate('login-page') );
+  }
+
+   if(! $this->session->get('cur_user')->getIsAdmin())  return new Response('you must be admin !');
+  if (! $this->session->get('Loan_edit'))   return new RedirectResponse( $this->router->generate('1home Loan') );
  $transactionData=$this->TransactionData(['Loan'=>$loan->getId()]);
 
   return $this->render('Loan/Report.html.twig',
@@ -1103,14 +1130,19 @@ public function ReportPage(Loan $loan)
 */
 public function addfeelingPage()
 {
+  if(! $this->session->get('cur_user')) {
+
+  return new RedirectResponse( $this->router->generate('login-page') );
+  }
+
 $Debtor=$this->session->get('cur_user')->getIsDebtor();
 $Creditor=$this->session->get('cur_user')->getIsCreditor();
   return $this->render('user/addfeeling.html.twig',
   [
-'cardTitle'=>'Add Feeling'
-,'Title' => 'Add Feeling'
+'cardTitle'=>'Add feeding'
+,'Title' => 'Add feeding'
    , 'action_path'=> 'addfeeling-submit','idsubmit'=>0
-, 'inputs'=>[['name'=>'Feeling']],'btn'=>'Add','Debtor'=>$Debtor,'Creditor'=>1
+, 'inputs'=>[['name'=>'Feeding']],'btn'=>'Done','Debtor'=>$Debtor,'Creditor'=>1
 ]);
 }
 
@@ -1120,6 +1152,10 @@ $Creditor=$this->session->get('cur_user')->getIsCreditor();
 */
 public function  addfeelingSubmit(Request $request)
 {
+  if(! $this->session->get('cur_user')) {
+
+  return new RedirectResponse( $this->router->generate('login-page') );
+  }
 
     $account = $request->request->get('Feeling');
  $type=$request->request->get('Type');
@@ -1143,6 +1179,11 @@ return new RedirectResponse( $this->router->generate('home') );
 */
 public function showActions()
 {
+  if(! $this->session->get('cur_user')) {
+
+  return new RedirectResponse( $this->router->generate('login-page') );
+  }
+
 $id=  $this->session->get('cur_user')->getId();
  $feeling=$this->Feeling(['user'=>$id]);
  $transactionData=$this->TransactionData(['User'=>$id]);

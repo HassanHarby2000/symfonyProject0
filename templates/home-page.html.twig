@@ -3213,7 +3213,7 @@ nav .mbr-section-btn {
 <li class="nav-item active">
     <a class="nav-link"href="{{path('home')}}">Home <span class="sr-only">(current)</span></a>
 </li>
-{% if isAdmin==0 %}
+{% if isAdmin==1 %}
 <li class="nav-item">
   <a class="nav-link"  href="{{path('1home Loan')}}">  All Loans <span class="sr-only">(current)</span></a>
 </li>
@@ -3221,10 +3221,11 @@ nav .mbr-section-btn {
   <a class="nav-link"  href="{{path('1state0 Loan')}}">  requested Loans <span class="sr-only">(current)</span></a>
 </li>
 
+
+{% else %}
 <li class="nav-item">
-  <a class="nav-link"  href="{{path('addfeeling-page')}}">  add feeling <span class="sr-only">(current)</span></a>
+  <a class="nav-link"  href="{{path('addfeeling-page')}}">  add feeding <span class="sr-only">(current)</span></a>
 </li>
-{#{% else %}#}
 <li class="nav-item">
   <a class="nav-link"  href="{{path('showActions')}}">  History <span class="sr-only">(current)</span></a>
 </li>
