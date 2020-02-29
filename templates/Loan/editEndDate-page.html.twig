@@ -1,0 +1,21 @@
+
+{%  extends 'base.html.twig'    %}
+
+{% block title %} Login  {% endblock %}
+{% block body %}
+<div class="container">
+  <form action="{{ path('editEndDate-submit',{'id':id} ) }}" method="post">
+      <label for="EndDate">Creditor:</label>
+      <input type="text" id="EndDate" name="EndDate" value="" />
+<!-- <br>
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" /> -->
+
+<br>
+      <button type="submit">login</button>
+  </form>
+  </div>
+
+
+
+{% endblock %}

@@ -1,0 +1,97 @@
+{%  extends 'base.html.twig'    %}
+
+{% block title %} Users  {% endblock %}
+{% block body %}
+<h1 > Debtor :- </h1>
+<div  class="container" >
+         <div class="row row-cols-1 row-cols-md-1">
+{% for loan in dataLoanDebtor %}
+<div class="col mb-4">
+  <a href="{{path('Report-page',{'id':loan.id})}}" class="card text-dark">
+<!--    <img src="..." class="card-img-top" alt="..."> -->
+    <div class="card-body">
+
+      <h5 class="card-title">>Debtor name :  {{loan.Debtor.name }} </h5>
+           <h5 class="card-title">>money :  {{loan.money }}   </h5>
+   </a>
+  </div>
+</div>
+
+{% endfor %}
+
+</div>
+</div>
+
+<!-- Creditor   -->
+
+<h1 > Creditor :- </h1>
+<div  class="container" >
+         <div class="row row-cols-1 row-cols-md-1">
+{% for loan in dataLoanCreditor %}
+<div class="col mb-4">
+  <a href="{{path('Report-page',{'id':loan.id})}}" class="card text-dark">
+<!--    <img src="..." class="card-img-top" alt="..."> -->
+    <div class="card-body">
+
+      <h5 class="card-title">>Debtor name :  {{loan.Debtor.name }} </h5>
+           <h5 class="card-title">>money :  {{loan.money }}   </h5>
+   </a>
+  </div>
+</div>
+
+{% endfor %}
+
+</div>
+</div>
+
+<!-- First_Guarantor   -->
+
+<h1 > First_Guarantor :- </h1>
+<div  class="container" >
+         <div class="row row-cols-1 row-cols-md-1">
+{% for loan in dataLoanFirst_Guarantor %}
+<div class="col mb-4">
+  <a href="{{path('Report-page',{'id':loan.id})}}" class="card text-dark">
+<!--    <img src="..." class="card-img-top" alt="..."> -->
+    <div class="card-body">
+
+      <h5 class="card-title">>Debtor name :  {{loan.Debtor.name }} </h5>
+           <h5 class="card-title">>money :  {{loan.money }}   </h5>
+   </a>
+  </div>
+</div>
+{% endfor %}
+
+</div>
+</div>
+
+<!-- Second_Guarantor   -->
+
+<h1 > Second_Guarantor :- </h1>
+<div  class="container" >
+         <div class="row row-cols-1 row-cols-md-1">
+{% for loan in dataLoanSecond_Guarantor %}
+<div class="col mb-4">
+  <a href="{{path('Report-page',{'id':loan.id})}}" class="card text-dark">
+<!--    <img src="..." class="card-img-top" alt="..."> -->
+    <div class="card-body">
+
+      <h5 class="card-title">>Debtor name :  {{loan.Debtor.name }} </h5>
+           <h5 class="card-title">>money :  {{loan.money }}   </h5>
+   </a>
+  </div>
+</div>
+{% endfor %}
+
+</div>
+</div>
+<!--
+return $this->render('user/showUserHistory.html.twig',[
+     'dataLoanDebtor'=>$dataLoanDebtor
+     ,'dataLoanCreditor'=>$dataLoanCreditor
+      ,'dataLoanFirst_Guarantor'=>$dataLoanFirst_Guarantor
+       ,'dataLoanSecond_Guarantor'=>$dataLoanSecond_Guarantor ]) ;
+
+}-->
+
+{% endblock %}

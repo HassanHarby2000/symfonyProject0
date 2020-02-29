@@ -1,0 +1,42 @@
+{%  extends 'base.html.twig'    %}
+
+{% block title %} add  {% endblock %}
+{% block body %}
+<!--
+return $this->render('Msg/ActionMsg.html.twig',
+['datamsgW0T0' => $datamsgW0T0
+,'datamsgW1T1Rn' => $datamsgW1T1Rn
+,'datamsgW1T1R1' => $datamsgW1T1R1
+,'datamsgW1T1R0' => $datamsgW1T1R0  ]);
+-->
+<div  class="container" >
+         <div class="row row-cols-1 row-cols-md-1">
+{% for msg in datamsgW0T0 %}
+
+
+            <div class="col mb-4">
+              <div class="card">
+            <!--    <img src="..." class="card-img-top" alt="..."> -->
+                <div class="card-body">
+                  <h5 class="card-title">
+        <a href="{{path('show loan',{'id':msg.LoanId})}}"> Loan  </a>    </h5>
+                  <h5 class="card-title">>Text : {{msg.text}} </h5>
+
+<div class="text-center">  <a
+   
+    class="btn btn-primary">Accept</a>  <a href="#" class="btn btn-danger">Reject</a> </div>
+                </div>
+              </div>
+            </div>
+
+
+
+{% endfor %}
+</div>
+</div>
+
+
+
+
+
+{% endblock %}

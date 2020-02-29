@@ -1,0 +1,72 @@
+
+{%  extends 'base.html.twig'    %}
+
+{% block title %} Report  {% endblock %}
+{% block body %}
+<!-- view acc report
+edit -> state==-1
+ -->
+ <section>
+ 	<h1 class="text-white">s </h1>
+ </section>
+
+ <!-- <img src="http://getwallpapers.com/wallpaper/full/a/5/d/544750.jpg" class="card-img  "style="height: 100vh;" alt="..."> -->
+ <div class="card-header" style="">
+ 	<ul class="nav nav-tabs card-header-tabs">
+ 			 <li class="nav-item mr-4">
+ 			[+] send Money : {{transactionData.sendMoney}}
+ 			 </li>
+ 			 <li class="nav-item mr-4">
+ 				 [-] receive Money : {{transactionData.receiveMoney}}
+ 			 </li>
+
+ 		 </ul>
+
+
+
+
+ </div>
+
+ <div  data-spy="scroll" style="max-height:200px;overflow-y: scroll; background-color:" class=" scrollspy-example"  >
+
+ 	<table class="table " >
+ 		<!-- <caption>List of users</caption> -->
+ 		<thead >
+ 			<tr>
+
+ 				<th scope="col">Date</th>
+ 				<th scope="col">laon</th>
+ 				<th scope="col">user</th>
+ 				<th scope="col">Money</th>
+ 			</tr>
+ 		</thead>
+
+ 		<tbody>
+
+
+
+ 			{%for tra in transactionData.data%}
+ 			<tr>
+
+
+ 				 <th scope="row">{{tra.date}}</th>
+ 				 <td>{{tra.loan}}</td>
+ 				 <td>{{tra.user}}</td>
+ 			 {%if tra.receive %}
+ 				 <td> [-] receive : {{tra.receive}} </td>
+ 			 {% endif %}
+ 			 {%if tra.send %}
+ 				 <td> [+] send : {{tra.send}} </td>
+ 			 {% endif %}
+
+
+ 			</tr>
+ 	{% endfor %}
+
+ 		</tbody>
+ 	</table>
+ </div>
+
+
+
+{% endblock %}

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{{Title}}</title>
+
+	 <!--Bootsrap 4 CDN-->
+	 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+		 <!--Fontawesome CDN-->
+	 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+
+ <style>
+ @import url('https://fonts.googleapis.com/css?family=Numans');
+
+ html,body{
+
+ font-family: 'Numans', sans-serif;
+ }
+
+
+
+
+
+ .social_icon span{
+ font-size: 60px;
+ margin-left: 10px;
+ color: #FFC312;
+ }
+
+ .social_icon span:hover{
+ color: white;
+ cursor: pointer;
+ }
+
+
+ .social_icon{
+ position: absolute;
+ right: 20px;
+ top: -45px;
+ }
+
+ .input-group-prepend span{
+ width: 50px;
+ background-color: #FFC312;
+ color: black;
+ border:0 !important;
+ }
+
+ input:focus{
+ outline: 0 0 0 0  !important;
+ box-shadow: 0 0 0 0 !important;
+
+ }
+
+
+
+ .login_btn{
+ color: black;
+ background-color: #FFC312;
+ width: 100px;
+ }
+
+ .login_btn:hover{
+ color: black  ;
+ background-color: #FFC38F  ;
+ }
+
+ .links{
+ color: white;
+ }
+
+ .links a{
+ margin-left: 4px;
+ }
+ </style>
+
+
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-light fixed-top " >
+		<a class="navbar-brand" href="#">Navbar</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNavDropdown" style="background-color: #fff !important">
+			<ul class="navbar-nav">
+				<li class="nav-item active">
+
+						<a class="nav-link"href="{{path('home')}}">Home <span class="sr-only">(current)</span></a>
+
+
+				</li>
+				<li class="nav-item">
+					<a class="nav-link"href="{{path('1home Loan')}}">all loans <span class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item">
+						<a class="nav-link"href="  {{path('1state0 Loan')}}   ">reqested loans  <span class="sr-only">(current)</span></a>
+				</li>
+
+			</ul>
+		</div>
+	</nav>
+	<section>
+	  <h1 class="text-white">s </h1>
+	</section>
+	<div class="  h-10 ">
+
+	</div>
+	<!-- <img src="http://getwallpapers.com/wallpaper/full/a/5/d/544750.jpg" class="card-img  "style="height: 100vh;" alt="..."> -->
+	<div class="card-header" style="">
+	  <ul class="nav nav-tabs card-header-tabs">
+	       <li class="nav-item mr-4">
+	      [+] send Money : {{transactionData.sendMoney}}
+	       </li>
+	       <li class="nav-item mr-4">
+	         [-] receive Money : {{transactionData.receiveMoney}}
+	       </li>
+
+	     </ul>
+
+
+
+
+	</div>
+	<div class="card-header text-body" style="">
+				<div class="">
+								 <div class="card-header text-center ">
+									 <h4>{{cardTitle}}</h4>
+								 </div>
+									 <div class="">
+													 <form  action="{{ path(action_path,{ 'id':idsubmit } ) }}" method="post" >
+												 <!-- {% for input in inputs %} -->
+											 <div class="input-group form-group">
+												 <div class="input-group-prepend">
+													 <span class="input-group-text"><i class="fas "></i></span>
+												 </div>
+												 <input type="text" name="{{input.name}}" id="{{input.name}}" class="form-control" placeholder="{{input.name}}">
+
+											 </div>
+												 <!-- {% endfor %} -->
+										 <div class="form-group">
+										 <div class="maxl">
+											 <label class="radio inline  font-weight-bold card-header ">
+											 <input type="radio" name="Type" value="send" checked>
+													 <span> send </span>
+										 </label>
+										 <label class="radio inline  font-weight-bold card-header ">
+													 <input type="radio" name="Type" value="receive">
+												<span>receive </span>
+										 </label>
+										 </div>
+										 </div>
+											 <div class="form-group">
+												 <input type="submit" value="{{btn}}" class="btn  login_btn">
+											 </div>
+										 </form>
+
+									 </div>
+							 </div>
+	</div>
+	<div  data-spy="scroll" style="max-height:200px;overflow-y: scroll; background-color:" class=" scrollspy-example"  >
+
+		<table class="table " >
+		  <!-- <caption>List of users</caption> -->
+		  <thead >
+		    <tr>
+
+		      <th scope="col">Date</th>
+		      <th scope="col">laon</th>
+		      <th scope="col">user</th>
+		      <th scope="col">Money</th>
+		    </tr>
+		  </thead>
+
+		  <tbody>
+
+
+
+		    {%for tra in transactionData.data%}
+		    <tr>
+
+
+		       <th scope="row">{{tra.date}}</th>
+		       <td>{{tra.loan}}</td>
+					 <td>{{tra.user}}</td>
+		     {%if tra.receive %}
+		       <td> [-] receive : {{tra.receive}} </td>
+				 {% endif %}
+				 {%if tra.send %}
+					 <td> [+] send : {{tra.send}} </td>
+				 {% endif %}
+
+
+		    </tr>
+		{% endfor %}
+
+		  </tbody>
+		</table>
+	</div>
+
+</body>
+
+
+
+
+</html>

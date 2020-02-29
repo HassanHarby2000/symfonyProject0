@@ -1,0 +1,88 @@
+{%  extends 'base.html.twig'    %}
+
+{% block title %} Home {% endblock %}
+{% block body %}
+<div  class="container" >
+         <div class="row row-cols-1 row-cols-md-4">
+            <div class="col mb-4">
+              <div class="card">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col mb-4">
+              <div class="card">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col mb-4">
+              <div class="card">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col mb-4">
+              <div class="card">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
+
+<div class="container">
+      <div class="row row-cols-1 row-cols-md-12">
+<div class="card-columns">
+{% for post in posts %}
+    <!-- about-us-page-template card -->
+    <div class="col  ">
+      <div class="card h-100 " >
+        <img src="templete_page/templates/about-us-page-template/Capture.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">about-us-page-template</h5>
+ <p class="card-text"><small class="text-muted"><a href="templete_page/templates/about-us-page-template/index.html">  See me </a></small></p>
+        </div>
+      </div>
+    </div>
+       {% endfor %}
+  </div>
+    </div>
+      </div>
+
+<div  class="container" >
+      <div class="row row-cols-1 row-cols-md-12">
+        <div class="card-columns">
+
+{% for post in posts %}
+<div class="col mb-4">
+
+  <div class="card">
+    <img src="..." class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">{{post.title}} </h5>
+        <p class="card-text">{{post.body}}</p>
+
+  </div>
+
+</div>
+</div>
+
+         {% endfor %}
+      </div>
+    </div>
+  </div>
+
+ {% endblock %}

@@ -1,0 +1,92 @@
+
+{%  extends 'base0.html.twig'    %}
+
+{% block title %} ACTIONs  {% endblock %}
+{% block body %}
+<!-- view acc report
+edit -> state==-1
+ -->
+<section>
+  <h1 class="text-white">s </h1>
+</section>
+<!-- container position-fixed //return ['data'=>$data, 'increase'=>$sendMoney, 'decrease'=>$receiveMoney]; -->
+
+<div class="card-header " style="">
+  <ul class="nav nav-tabs card-header-tabs">
+       <li class="nav-item mr-4">
+        [increase]  {{ feeling.increase}}
+       </li>
+       <li class="nav-item mr-4">
+            [decrease]  {{ feeling.decrease}}
+       </li>
+       <li class="nav-item mr-4">
+     [sendMoney]  {{ transactionData.sendMoney}}
+       </li>
+       <li class="nav-item mr-4">
+           [receiveMoney]  {{ transactionData.receiveMoney}}
+       </li>
+     </ul>
+
+
+
+</div>
+
+
+<div class="container"  >
+
+
+<table class="table " >
+  <!-- <caption>List of users</caption> -->
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Date</th>
+      <th scope="col">description</th>
+      <th scope="col">Money</th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+
+    {%for feel in feeling.data%}
+    <tr>
+
+      <!-- <th scope="row">{{feel.cnt}}</th> -->
+      <th scope="row">feeling</th>
+      <td>{{feel.date}}</td>
+      {%if feel.increase%}
+      <td>increase [feel]</td>
+     <td>[+] {{feel.increase}}</td>
+      {% else %}
+      <td> decrease [feel]</td>
+     <td>[-] {{feel.decrease}}</td>
+      {% endif %}
+
+    </tr>
+{% endfor %}
+
+    {%for feel in transactionData.data%}
+    <tr>
+
+      <!-- <th scope="row">{{feel.cnt}}</th> -->
+        <th scope="row">transaction</th>
+      <td>{{feel.date}}</td>
+      {%if feel.send %}
+      <td>send <a href="{{path('Report-page',{'id': feel.loan})}}">[in loan {{feel.loan}}]</a></td>
+     <td> {{feel.send}}</td>
+      {% else %}
+      <td> receive <a href="{{path('Report-page',{'id': feel.loan})}}">[in loan {{feel.loan}}]</a> </td>
+     <td>{{feel.receive}}</td>
+      {% endif %}
+
+    </tr>
+{% endfor %}
+
+  </tbody>
+</table>
+
+</div>
+
+
+{% endblock %}

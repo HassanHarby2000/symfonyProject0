@@ -1,0 +1,34 @@
+{%  extends 'base.html.twig'    %}
+
+{% block title %} Loan  {% endblock %}
+{% block body %}
+
+<div  class="container" >
+         <div class="row row-cols-1 row-cols-md-1">
+
+
+
+            <div class="col mb-4">
+              <div class="card">
+            <!--    <img src="..." class="card-img-top" alt="..."> -->
+                <div class="card-body">
+                  <h5 class="card-title">
+           >Creditor name : {{loan.Creditor.name }}   </h5>
+                  <h5 class="card-title">>Debtor name :  {{loan.Debtor.name }} </h5>
+                  <h5 class="card-title">>First_Guarantor name :  {{loan.First_Guarantor.name }}  <a href="{{path('edit First_Guarantor',{'id':loan.id})}}"  class="font-weight-normal float-md-right" >edit</a> </h5>
+                   <h5 class="card-title">>Second_Guarantor name : {{loan.Second_Guarantor.name }}  <a href="{{path('edit Second_Guarantor',{'id':loan.id})}}"  class="font-weight-normal float-md-right" >edit</a>  </h5>
+                  <h5 class="card-title">>money :  {{loan.money }}   </h5>
+                  <h5 class="card-title">>startDate :  {{loan.startDate }} <a href="#" size=1 class="font-weight-normal float-md-right" >edit</a>  </h5>
+                 <h5 class="card-title">>endDate :  {{loan.endDate }}   </h5>
+
+                </div>
+              </div>
+            </div>
+
+
+
+
+</div>
+</div>
+
+{% endblock %}

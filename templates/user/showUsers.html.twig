@@ -1,0 +1,18 @@
+{%  extends 'base.html.twig'    %}
+
+{% block title %} Users  {% endblock %}
+{% block body %}
+<h1>{{type}} :-</h1>
+
+{% for user in data %}
+<h2> <a href= {{ path('user History',{'id':user.id})  }}>{{user.name}}</a> <a href= {{ path('ask Creditor',{'id':user.id})  }}> ask Creditor </a></h2>
+<br> <br>
+{% endfor %}
+
+
+
+<!--
+array_push($data , ['id'=> $key->getId() , 'user_name' => $key->getUserName(),  'name' => $key->getname()  ]  );
+-->
+
+{% endblock %}

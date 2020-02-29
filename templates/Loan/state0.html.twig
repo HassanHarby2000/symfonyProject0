@@ -1,0 +1,58 @@
+{%  extends 'base.html.twig'    %}
+
+{% block title %} Loans  {% endblock %}
+{% block body %}
+<!--
+array_push($data,['Creditor' => [ 'id' => ($userCreditor) ? $userCreditor->getId() :'empty' , 'name' => ($userCreditor) ? $userCreditor->getname(): 'empty'  ]
+ ,'Debtor' => [ 'id' =>  ($userDebtor) ? $userDebtor->getId() : 'empty' , 'name' => ($userDebtor) ? $userDebtor->getname(): 'empty'  ]
+  , 'First_Guarantor' => [ 'id' =>  ($userFirst_Guarantor) ? $userFirst_Guarantor->getId() : 'empty' , 'name' => ($userFirst_Guarantor) ? $userFirst_Guarantor->getname(): 'empty'  ]
+  , 'Second_Guarantor' =>[ 'id' =>  ($userSecond_Guarantor) ? $userSecond_Guarantor->getId() : 'empty' , 'name' => ($userSecond_Guarantor) ? $userSecond_Guarantor->getname(): 'empty'  ]
+'money' => $Loans->getMoney(),
+'startDate' =>  $Loans->getStartDate(),
+'endDate' =>  $Loans->getEndDate()
+     ] )
+
+-->
+<div  class="container" >
+         <div class="row row-cols-1 row-cols-md-1">
+{% for loan in data %}
+
+
+            <div class="col mb-4">
+              <div class="card">
+            <!--    <img src="..." class="card-img-top" alt="..."> -->
+                <div class="card-body">
+                  <h5 class="card-title">
+        <a href="{{path('user Creditor')}}">  ></a> Creditor name : {{loan.Creditor.name }}   </h5>
+                  <h5 class="card-title">>Debtor name :  {{loan.Debtor.name }} </h5>
+                  <h5 class="card-title">>First_Guarantor name :  {{loan.First_Guarantor.name }}   </h5>
+                   <h5 class="card-title">>Second_Guarantor name : {{loan.Second_Guarantor.name }}     </h5>
+                  <h5 class="card-title">>money :  {{loan.money }}   </h5>
+                  <h5 class="card-title">>startDate :  {{loan.startDate }}    </h5>
+                 <h5 class="card-title">>endDate :  {{loan.startDate }}   </h5>
+<div class="text-center">  <a href="{{path('edit state0',{'id':loan.id})}}" class="btn btn-primary">Accept</a>  <a href="#" class="btn btn-danger">Reject</a> </div>
+                </div>
+              </div>
+            </div>
+
+
+
+{% endfor %}
+</div>
+</div>
+
+<!--
+{% for loan in data %}
+
+<h1> {{loan.Creditor.id }}  </h1> <br>
+<h1> {{loan.Debtor.name }}  </h1> <br>
+<h1> {{loan.money }}  </h1> <br> <br>
+
+{% endfor %}
+
+ -->
+
+
+
+
+{% endblock %}

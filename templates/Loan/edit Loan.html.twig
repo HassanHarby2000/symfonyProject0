@@ -1,0 +1,70 @@
+{%  extends 'base.html.twig'    %}
+
+{% block title %} Loans0  {% endblock %}
+{% block body %}
+<!--
+array_push($data,['Creditor' => [ 'id' => ($userCreditor) ? $userCreditor->getId() :'empty' , 'name' => ($userCreditor) ? $userCreditor->getname(): 'empty'  ]
+ ,'Debtor' => [ 'id' =>  ($userDebtor) ? $userDebtor->getId() : 'empty' , 'name' => ($userDebtor) ? $userDebtor->getname(): 'empty'  ]
+  , 'First_Guarantor' => [ 'id' =>  ($userFirst_Guarantor) ? $userFirst_Guarantor->getId() : 'empty' , 'name' => ($userFirst_Guarantor) ? $userFirst_Guarantor->getname(): 'empty'  ]
+  , 'Second_Guarantor' =>[ 'id' =>  ($userSecond_Guarantor) ? $userSecond_Guarantor->getId() : 'empty' , 'name' => ($userSecond_Guarantor) ? $userSecond_Guarantor->getname(): 'empty'  ]
+'money' => $Loans->getMoney(),
+'startDate' =>  $Loans->getStartDate(),
+'endDate' =>  $Loans->getEndDate()
+     ] )
+
+-->
+<section>
+  <h1 class="text-white">s </h1>
+</section>
+<div class="text-center">  <a href="{{path('Report-page',{'id':loan.id})}}" class="card-header">Report</a> </div>
+
+<div  class="container mt-100" >
+
+         <div class="row row-cols-1 row-cols-md-1">
+
+
+
+            <div class="col mb-4">
+              <div class="card">
+            <!--    <img src="..." class="card-img-top" alt="..."> -->
+                <div class="card-body">
+                  <h5 class="card-title">
+    {#  <a href="{{path('user Creditor')}}">  ></a> #} Creditor(s) :- <a href="{{path('addCreditor-page',{'id':loan.id})}}"  class="font-weight-normal float-md-right" >add </a>  </h5>
+        {% for cr in loan.Creditor %}
+
+         <h5 class="card-text">   {{cr.name }}
+         <a href="{{path('del CreditorLoan',{'id':cr.id})}}"  class="font-weight-normal float-md-right ml-2 " >delete </a>
+           <a href="{{path('_editAccount-page',{'id':cr.userId})}}"  class="font-weight-normal float-md-right " >editAccount </a>
+          </h5>
+
+        {% endfor %}
+                  <h5 class="card-title">>Debtor name :  {{loan.Debtor.name }}
+                    <a href="{{path('_editAccount-page',{'id':loan.Debtor.id})}}"  class="font-weight-normal float-md-right " >editAccount </a>
+
+                   </h5>
+                  <h5 class="card-title">>First_Guarantor name :  {{loan.First_Guarantor.name }}  <a href="{{path('_editFirst_Guarantor-page',{'id':loan.id})}}"  class="font-weight-normal float-md-right" >edit</a> </h5>
+                   <h5 class="card-title">>Second_Guarantor name : {{loan.Second_Guarantor.name }}   <a href="{{path('_editSecond_Guarantor-page',{'id':loan.id})}}"  class="font-weight-normal float-md-right" >edit</a>    </h5>
+                  <h5 class="card-title">>money :  {{loan.money }}  <a href="{{path('_editMoney-page',{'id':loan.id})}}"  class="font-weight-normal float-md-right" >edit Money</a> </h5>
+                  <h5 class="card-title">>startDate :  {{loan.startDate }}  <a href="{{path('_editStartDate-page',{'id':loan.id})}}"  class="font-weight-normal float-md-right" >edit  Start Date</a>  </h5>
+                 <h5 class="card-title">>endDate :  {{loan.endDate }} <a href="{{path('_editEndDate-page',{'id':loan.id})}}"  class="font-weight-normal float-md-right" >edit End Date</a>  </h5>
+                 {%if loan.state ==0 %}
+                 <div class="text-center">  <a href="{{path('edit state0',{'id':loan.id})}}" class="btn btn-primary">Accept</a>  <a href="{{path('edit state0to_1',{'id':loan.id})}}" class="btn btn-danger">Reject</a> </div>
+                 {% endif %}
+
+
+                </div>
+              </div>
+            </div>
+
+
+
+
+</div>
+</div>
+
+
+
+
+
+
+{% endblock %}
